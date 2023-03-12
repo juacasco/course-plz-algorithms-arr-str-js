@@ -17,9 +17,12 @@ function isAlienSorted(palabras, orden) {
 
         for (let indexL = 0; indexL < evalWord1.length; indexL++) {
             // get accumulated value of word 1 and word 2
-            evalWord1Value += orden.indexOf(evalWord1[indexL])+1;
-            evalWord2Value += orden.indexOf(evalWord2[indexL])+1;
-            
+            let word1LetterValue = orden.indexOf(evalWord1[indexL]);
+            let word2LetterValue = orden.indexOf(evalWord2[indexL]);
+
+            evalWord1Value += word1LetterValue +1;
+            evalWord2Value += word2LetterValue +1;
+
             console.log(`Evaluating ${evalWord1[indexL]} value: ${evalWord1Value} and ${evalWord2[indexL]} value ${evalWord2Value}`);
             if (evalWord1Value > evalWord2Value) {
                 console.log(`Returning false as is not ordered`);
@@ -27,8 +30,50 @@ function isAlienSorted(palabras, orden) {
             }
         }
     }
+    console.log(`Returning true as is ordered`);
     return true;
 }
-const words1 = ["habito", "ha", "lectura", "sonreir"];
+
+function isAlienSortedPlatziProposal(palabras, orden) {
+    console.log(palabras);
+    console.log(orden);
+    const mapa_diccionario = new Map();
+
+    for (let i = 0; i < orden.length; i++) {
+      mapa_diccionario[orden[i]] = i;
+    }
+
+    const comparar = function (palabra1, palabra2) {
+      const longitud = Math.min(palabra1.length, palabra2.length);
+
+      for (let i = 0; i < longitud; i++) {
+        if (mapa_diccionario[palabra1[i]] < mapa_diccionario[palabra2[i]]) {
+          return true;
+        }
+        if (mapa_diccionario[palabra1[i]] > mapa_diccionario[palabra2[i]]) {
+          return false;
+        }
+      }
+
+      return palabra1.length <= palabra2.length;
+    };
+
+      for (let i = 1; i < palabras.length; i++) {
+        if (comparar(palabras[i - 1], palabras[i]) === false) {
+          return false;
+        }
+      }
+
+    return true;
+  }
+
+
+const words1 = ["habito", "hacer", "lectura", "sonreir"];
 const order1 = "hlabcdfgijkmnopqrstuvwxyz";
-isAlienSorted(words1, order1);
+isAlienSortedPlatziProposal(words1, order1);
+const words2 = ["habito", "hacer", "sonreir", "lectura"];
+const order2 = "hlabcdfgijkmnopqrstuvwxyz";
+isAlienSorted(words2, order2);
+const words3 = ["conocer", "cono"];
+const order3 = "abcdefghijkmnopqrstuvwxyz";
+isAlienSorted(words3, order3);
