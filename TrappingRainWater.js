@@ -26,11 +26,11 @@ function trappedWater(listOfColumns){
     return trappedWater;
 }
 
-/*const alturas = [1,8,6,2,5,4,8,3,7]
+const alturas = [1,8,6,2,5,4,8,3,7]
 console.log(trappedWater(alturas));
 
 const alturas1 = [8,1,6,2,5,4,1,3,7];
 console.log(trappedWater(alturas1));
-*/
+
 const alturas2 = [0,1,0,2,1,0,1,3,2,1,2,1];
 console.log(trappedWater(alturas2));
