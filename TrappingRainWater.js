@@ -2,22 +2,26 @@ function trappedWater(listOfColumns){
     let p1 = 0;
     let p2 = listOfColumns.length-1; //10
     let trappedWater = 0;
-    let lastMinHeight = 0;
+    let maxLHeight = 0;
+    let maxRHeight = 0;
     while (p1<p2) {
-        console.log (`p1: ${p1}, p2:${p2}`)
-        let height = (Math.min(listOfColumns[p1], listOfColumns[p2]) - lastMinHeight) <= 0? 0: (Math.min(listOfColumns[p1], listOfColumns[p2]) - lastMinHeight);
-
-        let area = height * (p2-p1-1);
-        console.log(`area: ${area}, height: ${height}, base:${p2-p1} `);
-        lastMinHeight = Math.max(Math.min(listOfColumns[p1], listOfColumns[p2]),lastMinHeight)
-
-        trappedWater += area - Math.min(listOfColumns[p2], lastMinHeight);
-        console.log(`lastMinHeight: ${lastMinHeight}, trappedWater: ${trappedWater}`);
-        if (listOfColumns[p1] <= listOfColumns[p2]) {
-            p1++;//1 |
+        if (listOfColumns[p1] < listOfColumns[p2]) {
+            if (listOfColumns[p1] < maxLHeight) {
+                trappedWater += maxLHeight-listOfColumns[p1];
+            } else{
+                maxLHeight = listOfColumns[p1];
+            }
+            p1++;
         }else{
-            p2--;//10 |
+            if (listOfColumns[p2] < maxRHeight) {
+                trappedWater += maxRHeight - listOfColumns[p2];
+            }   else{
+                maxRHeight = listOfColumns[p2];
+            }
+            p2--;
         }
+        console.log(`p1: ${p1}, p2:${p2}`);
+        console.log(`trappedWater: ${trappedWater}, maxLHeight: ${maxLHeight}, maxRHeight: ${maxRHeight}`);
     }
     return trappedWater;
 }
