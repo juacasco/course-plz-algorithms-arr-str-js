@@ -6,7 +6,7 @@ function reorderColors(arrayColors){
     let p2 = arrayColors.length - 1;
     let i = 0;
 
-    while (i<p2) {
+    while (i<=p2) {
         let current = arrayColors[i];
         if (current === 0) {
             arrayColors[i] = arrayColors[p1];
