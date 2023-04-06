@@ -3,13 +3,13 @@ function reverseVowels(s) {
     let vocales = getVowels(['a','A','e','E','i','I','o','O','u','U']); //get un hash table with vowels
     let p2 = s.length -1;
     let p1= 0;
+    let inputW = s.split("");
     while (p1<p2) {
-        if (vocales.has(s[p1])) {
-            if (vocales.has(s[p2])) {
-                let vHolder = s[p1];
-                s[p1] = s[p2];
-                s[p2] = vHolder;
-                console.log(s);
+        if (vocales.has(inputW[p1])) {
+            if (vocales.has(inputW[p2])) {
+                let vHolder = inputW[p1];
+                inputW[p1] = inputW[p2];
+                inputW[p2] = vHolder;
                 p2--;
                 p1++;
             } else{
@@ -19,7 +19,7 @@ function reverseVowels(s) {
             p1++;
         }
     }
-    return s;
+    return inputW.join("");;
 }
 
 function getVowels(arrV){
@@ -27,10 +27,9 @@ function getVowels(arrV){
     for (let i = 0; i < arrV.length; i++) {
         toMap.set(arrV[i], i);
     }
-    console.log(toMap);
     return toMap;
 }
 
-let s = 'hola';
+let s = 'leetcode';
 console.log(reverseVowels(s));
 
