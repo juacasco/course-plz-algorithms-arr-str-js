@@ -67,10 +67,42 @@ function isAlienSortedPlatziProposal(palabras, orden) {
     return true;
   }
 
+function isAlienDictionary_r1(alphabet, wordList){
+  console.log(alphabet)
+  console.log(wordList)
+  const alphabet_map = new Map();
+
+  for(let i = 0; i < alphabet.length; i++){
+    alphabet_map[alphabet[i]] = i;
+  }
+
+  const compareWord = function (w1, w2){
+    const wordMinSize = Math.min(w1.length, w2.length)
+
+    for (let i = 0; i < wordMinSize; i++){
+      if(alphabet_map[w1[i]] < alphabet_map[w2[i]]){
+        return true;
+      }
+      if (alphabet_map[w1[i]] > alphabet_map[w2[i]]) {
+        return false;
+      }
+    }
+    return w1.length <= w2.length;
+  };
+
+  for (let i = 1; i < wordList.length; i++){
+    if (compareWord(wordList[i-1],wordList[i]) === false){
+      return false;
+    }
+  }
+  return true
+}
 
 const words1 = ["habito", "hacer", "lectura", "sonreir"];
 const order1 = "hlabcdfgijkmnopqrstuvwxyz";
-isAlienSortedPlatziProposal(words1, order1);
+//isAlienSortedPlatziProposal(words1, order1);
+
+console.log(isAlienDictionary_r1(order1, words1));
 const words2 = ["habito", "hacer", "sonreir", "lectura"];
 const order2 = "hlabcdfgijkmnopqrstuvwxyz";
 isAlienSorted(words2, order2);
