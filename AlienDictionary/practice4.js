@@ -4,7 +4,7 @@ function isProperlySorted(alphabet, listWords){
         alphabetMap[alphabet[i]] = i;
     }
     const compareWordsOrder = function (w1, w2){
-        minWordLen = Math.min(w1.length, w2.length);
+        const minWordLen = Math.min(w1.length, w2.length);
         for(let i = 0; i<minWordLen;i++){
             if(alphabetMap[w1[i]] < alphabetMap[w2[i]]){
                 return true;
